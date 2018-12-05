@@ -64,9 +64,9 @@ config:
           - ""
         ##
         topics:
-          - "telegraf__"
+          - ""
         ##
-        consumer_group: "consumer_{}_ifx2"
+        consumer_group: ""
         offset: "oldest"
         data_format: "influx"
         max_message_len: 0
