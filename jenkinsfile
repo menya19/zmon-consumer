@@ -22,7 +22,7 @@ podTemplate(label:label,
                     yaml.update file: 'values.yaml', update: ['.config.inputs[0].kafka_consumer.brokers[0]':"${env.KAFKA_BROKER_1}", '.config.inputs[0].kafka_consumer.brokers[1]':"${env.KAFKA_BROKER_2}", '.config.inputs[0].kafka_consumer.brokers[2]':"${env.KAFKA_BROKER_3}", '.config.inputs[0].kafka_consumer.topic':"telegraf__${TENANT}" , '.config.inputs[0].kafka_consumer.consumer_group':"consumer_${TENANT}_ifx1" , '.config.outputs[0].influxdb.urls[0]': "${IFX_1}",  '.config.outputs[0].influxdb.database': "zmon_${TENANT}", '.config.outputs[0].influxdb.username': "${ADMIN}", '.config.outputs[0].influxdb.password': "${ADMINPASS}"]
                   }
                   sh "cat values.yaml"
-                  //sh 'helm install --namespace menya --name listenr-test -f values.yaml .'
+                  sh 'helm install --namespace menya --name consumer-test-ifx1 -f values.yaml .'
                 }
               }
           }
@@ -34,7 +34,7 @@ podTemplate(label:label,
                     yaml.update file: 'values.yaml', update: ['.config.inputs[0].kafka_consumer.brokers[0]':"${env.KAFKA_BROKER_1}", '.config.inputs[0].kafka_consumer.brokers[1]':"${env.KAFKA_BROKER_2}", '.config.inputs[0].kafka_consumer.brokers[2]':"${env.KAFKA_BROKER_3}", '.config.inputs[0].kafka_consumer.topic':"telegraf__${TENANT}" , '.config.inputs[0].kafka_consumer.consumer_group':"consumer_${TENANT}_ifx2" , '.config.outputs[0].influxdb.urls[0]': "${IFX_2}",  '.config.outputs[0].influxdb.database': "zmon_${TENANT}", '.config.outputs[0].influxdb.username': "${ADMIN}", '.config.outputs[0].influxdb.password': "${ADMINPASS}"]
                   }
                   sh "cat values.yaml"
-                  //sh 'helm install --namespace menya --name listenr-test -f values.yaml .'
+                  sh 'helm install --namespace menya --name consumer-test-ifx2 -f values.yaml .'
                 }
               }
           }
