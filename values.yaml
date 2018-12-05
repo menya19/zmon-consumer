@@ -33,7 +33,7 @@ affinity: {}
 ## Service Plugins: http_listener, statsd, tcp_listener, udp_listener
 ## ref: http://kubernetes.io/docs/user-guide/services/
 service:
-  enabled: true
+  enabled: false
   type: ClusterIP
 
 ## Exposed telegraf configuration
