@@ -26,7 +26,7 @@ podTemplate(label:label,
                 }
               }
           }
-
+ 
           stage('IFX_2 CONSUMER') {
               container('helm') {
                 withEnv(['KUBECONFIG=/var/config/menya-test/kube-config-zmon.yml']) {
