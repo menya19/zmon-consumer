@@ -3,7 +3,7 @@ def label = "jenkins-${UUID.randomUUID().toString()}"
 
 podTemplate(label:label,
     containers: [
-        containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm', ttyEnabled: true, command: 'cat')
+        containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.9.1', ttyEnabled: true, command: 'cat')
     ],
     volumes: [
         configMapVolume(mountPath: '/var/config/zmon', configMapName: 'zmon-kube-config')
