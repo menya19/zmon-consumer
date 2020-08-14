@@ -1,9 +1,10 @@
+role: "{ role }"
 ## Default values.yaml for Telegraf
 ## This is a YAML-formatted file.
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.8.1-alpine"
+  tag: "1.11.1-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
@@ -56,31 +57,34 @@ config:
     hostname: "telegraf-polling-service"
     omit_hostname: false
   inputs:
-    - kafka_consumer:
-        ##
-        brokers:
-          - ""
-          - ""
-          - ""
-        ##
-        topics:
-          - ""
-        ##
-        consumer_group: ""
-        offset: "oldest"
-        data_format: "influx"
-        max_message_len: 0
+   ## consumer input
+   - kafka_consumer:
+       # url:port
+       brokers:
+         - "{ kafka_1 }"
+         - "{ kafka_2 }"
+         - "{ kafka_3 }"
+       # todo insert tenantID
+       topics:
+         - "telegraf__{ tenantID }"
+       # todo insert tenantID
+       # consumerGroup : { tenantID }_consumers_ifx1 or 2
+       consumer_group: "{ consumerGroup }"
+       offset: "oldest"
+       data_format: "influx"
+       max_message_len: 0
+
   outputs:
-    - influxdb:
-        urls:
-          ## ifx-01,ifx-02
-          - ""
-        ##
-        database: "zmon_"
-        retention_policy: ""
-        write_consistency: "any"
-        timeout: "30s"
-        ##
-        username: ""
-        ##
-        password: ""
+   ## consumer output
+   - influxdb:
+       urls:
+         # http://url:port
+         - "{ influxdb }"
+       # todo insert tenantID
+       database: "zmon_{ tenantID }"
+       retention_policy: ""
+       write_consistency: "any"
+       timeout: "30s"
+       username: "{ user }"
+       # todo insert influx password
+       password: "{ password }"
